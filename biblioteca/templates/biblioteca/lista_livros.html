@@ -20,7 +20,8 @@
     <h1>Mini Biblioteca</h1>
     <p>
         <a href="{% url 'biblioteca:book_create' %}">Novo livro</a> |
-        <a href="{% url 'biblioteca:author_create' %}">Novo autor</a>
+        <a href="{% url 'biblioteca:author_create' %}">Novo autor</a> |
+        <a href="{% url 'biblioteca:sobre' %}">Sobre</a>
     </p>
 
     {% if livros %}
@@ -39,7 +40,7 @@
             {% for livro in livros %}
             <tr>
                 <td>{% if livro.capa %}<img class="capa" src="{{ livro.capa.url }}" alt="Capa de {{ livro.title }}">{% endif %}</td>
-                <td>{{ livro.title }}</td>
+                <td><a href="{% url 'biblioteca:book_detail' livro.pk %}">{{ livro.title }}</a></td>
                 <td><a href="{% url 'biblioteca:author_detail' livro.author.pk %}">{{ livro.author.name }}</a></td>
                 <td>{{ livro.year }}</td>
                 <td>
@@ -49,7 +50,10 @@
                         <span class="indisponivel">Não</span>
                     {% endif %}
                 </td>
-                <td><a href="{% url 'biblioteca:book_edit' livro.pk %}">Editar</a></td>
+                <td>
+                    <a href="{% url 'biblioteca:book_edit' livro.pk %}">Editar</a> |
+                    <a href="{% url 'biblioteca:book_delete' livro.pk %}">Excluir</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

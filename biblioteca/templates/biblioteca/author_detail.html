@@ -37,7 +37,7 @@
             {% for livro in livros %}
             <tr>
                 <td>{% if livro.capa %}<img class="capa" src="{{ livro.capa.url }}" alt="Capa de {{ livro.title }}">{% endif %}</td>
-                <td>{{ livro.title }}</td>
+                <td><a href="{% url 'biblioteca:book_detail' livro.pk %}">{{ livro.title }}</a></td>
                 <td>{{ livro.year }}</td>
                 <td>{{ livro.categories.all|join:", " }}</td>
                 <td>

@@ -51,6 +51,22 @@
             {% endfor %}
         </div>
 
+        <div class="campo">
+            {{ form.pages.label_tag }}
+            {{ form.pages }}
+            {% for erro in form.pages.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="campo">
+            {{ form.isbn.label_tag }}
+            {{ form.isbn }}
+            {% for erro in form.isbn.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
         <div class="campo marcar">
             {{ form.available }} {{ form.available.label_tag }}
             {% for erro in form.available.errors %}

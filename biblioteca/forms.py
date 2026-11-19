@@ -1,5 +1,3 @@
-from datetime import date
-
 from django import forms
 
 from .models import Author, Book
@@ -18,11 +16,13 @@ class AuthorForm(forms.ModelForm):
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ["title", "author", "year", "available", "categories"]
+        fields = ["title", "author", "year", "pages", "isbn", "available", "categories"]
         labels = {
             "title": "Título",
             "author": "Autor",
             "year": "Ano",
+            "pages": "Páginas",
+            "isbn": "ISBN",
             "available": "Disponível",
             "categories": "Categorias",
         }
@@ -40,18 +40,4 @@ class BookForm(forms.ModelForm):
         }
 
     def clean_title(self):
-        titulo = " ".join(self.cleaned_data["title"].split())
-        if len(titulo) < 3:
-            raise forms.ValidationError(
-                "O título precisa ter pelo menos 3 caracteres, sem contar os espaços sobrando. Escreva o título completo do livro."
-            )
-        return titulo
-
-    def clean_year(self):
-        ano = self.cleaned_data["year"]
-        ano_atual = date.today().year
-        if ano > ano_atual:
-            raise forms.ValidationError(
-                f"O ano não pode ser depois de {ano_atual}. Confira o ano de publicação e informe {ano_atual} ou um ano anterior."
-            )
-        return ano
+        return " ".join(self.cleaned_data["title"].split())

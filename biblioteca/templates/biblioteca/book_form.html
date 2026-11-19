@@ -20,7 +20,7 @@
     <p><a href="{% url 'biblioteca:listar_livros' %}">&larr; Voltar para a lista</a></p>
     <h1>{{ titulo }}</h1>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% for erro in form.non_field_errors %}
@@ -63,6 +63,14 @@
             {{ form.isbn.label_tag }}
             {{ form.isbn }}
             {% for erro in form.isbn.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="campo">
+            {{ form.capa.label_tag }}
+            {{ form.capa }}
+            {% for erro in form.capa.errors %}
                 <p class="erro">{{ erro }}</p>
             {% endfor %}
         </div>

@@ -29,7 +29,7 @@ def book_form(request, pk=None):
     livro = get_object_or_404(Book, pk=pk) if pk is not None else None
 
     if request.method == "POST":
-        form = BookForm(request.POST, instance=livro)
+        form = BookForm(request.POST, request.FILES, instance=livro)
         if form.is_valid():
             livro = form.save()
             return redirect("biblioteca:author_detail", pk=livro.author_id)

@@ -16,13 +16,14 @@ class AuthorForm(forms.ModelForm):
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ["title", "author", "year", "pages", "isbn", "available", "categories"]
+        fields = ["title", "author", "year", "pages", "isbn", "capa", "available", "categories"]
         labels = {
             "title": "Título",
             "author": "Autor",
             "year": "Ano",
             "pages": "Páginas",
             "isbn": "ISBN",
+            "capa": "Capa",
             "available": "Disponível",
             "categories": "Categorias",
         }

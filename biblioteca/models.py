@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.core.validators import (
+    FileExtensionValidator,
     MaxValueValidator,
     MinLengthValidator,
     MinValueValidator,
@@ -7,7 +8,7 @@ from django.core.validators import (
 )
 from django.db import models
 
-from .validators import validar_ano_publicacao
+from .validators import validar_ano_publicacao, validar_tamanho_arquivo
 
 
 class Author(models.Model):
@@ -70,6 +71,15 @@ class Book(models.Model):
         max_length=13,
         blank=True,
         validators=[RegexValidator(r"^\d{13}$", "O ISBN precisa ter exatamente 13 dígitos, só números.")],
+    )
+    capa = models.ImageField(
+        "capa",
+        upload_to="capas/",
+        blank=True,
+        validators=[
+            validar_tamanho_arquivo,
+            FileExtensionValidator(["jpg", "jpeg", "png"], "Envie a capa em jpg, jpeg ou png."),
+        ],
     )
     available = models.BooleanField("disponível", default=True)
 
